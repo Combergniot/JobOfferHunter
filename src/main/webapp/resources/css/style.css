@@ -1,0 +1,180 @@
+/*
+font-family: 'Libre Franklin', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Lato', sans-serif;
+*/
+
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+.rotated {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -moz-transform: rotate(180deg); /* Firefox */
+    -webkit-transform: rotate(180deg); /* Safari and Chrome */
+    -o-transform: rotate(180deg); /* Opera */
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+
+/*LOGIN PAGE*/
+
+
+
+.container-fluid#loginBgWrapper{
+    height: 100vh;
+    /*background: -webkit-radial-gradient(center, ellipse cover, rgba(72, 85, 99,0.2) 100%, rgba(41, 50, 60,0.2) 100%);*/
+    background-size: auto;
+    background: url('/resources/img/spider.png') no-repeat 50px 100px;
+    margin-top: -34px;
+    
+
+}
+
+div.loginContainer{
+    background: rgba(232, 232, 232, 0.6);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 25%;
+    transform: translateY(-25%);
+}
+
+
+div.loginContainer form{
+    width: 50%;
+    margin: 0 auto;
+}
+
+
+/*END OF LOGIN PAGE*/
+
+
+
+nav#mainNav {
+    border-bottom: 0;
+    background: white;
+/*Pierwsza wersja kolorystyczna
+/*background: -webkit-linear-gradient(left, rgba(0, 0, 70,1),rgba(28, 181, 224,1));*/
+}
+
+nav#mainNav div#navContainer {
+    height: 92px;
+}
+
+nav#mainNav a.navbar-brand {
+    background-image: url('/resources/img/logo_us.png');
+    background-size: cover;
+    height: 80px;
+    width: 180px;
+    margin-top: 2px;
+}
+
+nav#mainNav a.navbar-brand:hover {}
+
+nav#mainNav div#navContainer ul li {
+    height: 92px;
+}
+
+nav#mainNav div#navContainer ul li a {
+    font-family: 'Libre Franklin', sans-serif;
+    padding-top: 34px;
+    color: black;
+    font-size: 20px;
+    transition: all 400ms;
+}
+
+nav#mainNav div#navContainer ul li a:active {
+    color: black; 
+}
+
+.navbar-default .navbar-nav>.nav-item.dropdown,
+.navbar-default .navbar-nav>.open>a#dropp,
+.navbar-default .navbar-nav>.open>a#dropp:focus,
+.navbar-default .navbar-nav>.open>a#dropp:hover {
+    cursor: pointer;
+    cursor: hand;
+    background: transparent;
+}
+
+.navbar-default .navbar-nav #reportCaret{
+    transition: all 200ms ease-in-out;
+}
+
+
+nav#mainNav div#navContainer ul li a.dropdown-item {
+    padding-top: 1px;
+    color: black;
+    font-size: 16px;
+    width: 100%;
+    display: inline-block;
+}
+
+nav#mainNav div#navContainer ul div#dropMenu {
+    background-color: white;
+    text-align: center;
+    min-width: 100px;
+    margin-top: -1px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+nav#mainNav div#navContainer ul div#dropMenu a:link,
+nav#mainNav div#navContainer ul div#dropMenu a:visited {
+    text-decoration: none;
+    padding-top: 10px;
+    color: black;
+}
+
+nav#mainNav div#navContainer ul div#dropMenu a:hover {
+    color: dimgray;
+}
+
+.mainContainer{
+    margin-top: 100px;
+}
+
+
+.pola-grupy .col-md-3 .form-group .form-control{
+    width: 92%;
+}
+
+
+legend{
+    margin-top: 20px;
+}
+
+.new-company{
+    display:none;
+}
+
+.existing-company-select-wrapper{
+    width: 80%;
+}
+
+
