@@ -1,8 +1,8 @@
-# JobOfferHunter
+JobOfferHunter
 
 JobOfferHunter - scraps detailed job vacancies data from job-portals and save them in your SQL database
 
-#Before you start
+Before you start
 
 You need relational database (e.g. MySql, Postres) and Apache Tomcat server.
 
