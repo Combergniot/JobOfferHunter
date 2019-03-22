@@ -69,32 +69,32 @@ public class JobSwypeScrapper extends DataCollectorSettings {
 
     }
 
-    private String searchForSalary(Element element) {
+    public String searchForSalary(Element element) {
         String salary =
                 element.select("span.delimiter.d-none.job-salary").text();
         return salary;
     }
 
-    private String searchForEmployer(Element element) {
+    public String searchForEmployer(Element element) {
         String employer = element.select("span.delimiter.d-none.job-company").text();
         return employer;
     }
 
-    private String searchForUrl(Element element) {
+    public String searchForUrl(Element element) {
         String url =
                 element.select("a.ext-link")
                         .attr("abs:href");
         return url;
     }
 
-    private String searchForTypeOfWork(Element element) {
+    public String searchForTypeOfWork(Element element) {
         String typeOfWork = element.select("span.delimiter")
                 .first()
                 .text();
         return typeOfWork;
     }
 
-     private String searchForWorkplace(Element element) {
+     public String searchForWorkplace(Element element) {
         String workplace =
                 element.select("span.delimiter:gt(2)")
                         .not("span.delimiter.d-none.job-company")
@@ -103,12 +103,12 @@ public class JobSwypeScrapper extends DataCollectorSettings {
         return workplace;
     }
 
-    private String searchForPosition(Element element) {
+    public String searchForPosition(Element element) {
         String position = element.select("div.card-header").text();
         return position;
     }
 
-    private String searchForDatePublished(Element element) {
+    public String searchForDatePublished(Element element) {
         String datePublished = element.select("span.job-date").text();
         return datePublished;
     }
