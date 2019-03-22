@@ -14,7 +14,7 @@ public class AdzunaScrapperTest extends DataCollectorSettings{
 
     private final String LINK = "https://www.adzuna.pl/search?loc=133355&p=5";
 
-    public Elements setUpElements() throws IOException {
+    private Elements setUpElements() throws IOException {
         Document singleOffer = connectWith(LINK);
         Elements jobOfferTable = singleOffer.select("div.sr");
         Elements singleOfferBox = jobOfferTable.select("div.a");

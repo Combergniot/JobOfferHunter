@@ -14,7 +14,7 @@ public class LinguaJobScrapperTest extends DataCollectorSettings {
 
     private final String LINK = "http://www.linguajob.pl/szukaj/?p=2";
 
-    public Elements setUpElements() throws IOException {
+    private Elements setUpElements() throws IOException {
         Document document = connectWith(LINK);
         Elements jobOfferTable = document.select("div#ogloszenia");
         Elements singleOfferBox = jobOfferTable.select("div.ogloszenie");

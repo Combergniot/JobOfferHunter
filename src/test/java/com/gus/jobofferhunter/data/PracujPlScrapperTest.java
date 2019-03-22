@@ -16,7 +16,7 @@ public class PracujPlScrapperTest extends DataCollectorSettings {
     private String applyBoxSelector = "div.apply";
     private String branchParameterSelector = "div.content";
 
-    public Elements setUpElements(String selector) throws IOException {
+    private Elements setUpElements(String selector) throws IOException {
         Document document = connectWith(
                 pracujPlScrapper
                         .collectLinkFromOneSite(LINK)

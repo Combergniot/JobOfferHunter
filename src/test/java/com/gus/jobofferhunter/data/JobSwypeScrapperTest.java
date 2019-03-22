@@ -14,7 +14,7 @@ public class JobSwypeScrapperTest extends DataCollectorSettings {
 
     private final String LINK = "https://www.jobswype.pl/praca?title=&location=&radius=0&sorting=&display=&page=3";
 
-    public Elements setUpElements() throws IOException {
+    private Elements setUpElements() throws IOException {
         Document document = connectWith(LINK);
         Elements singleOffer = document.select("div#content>div.job.card.mb-1");
         return singleOffer;

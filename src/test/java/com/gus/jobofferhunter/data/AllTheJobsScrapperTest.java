@@ -13,15 +13,14 @@ public class AllTheJobsScrapperTest extends DataCollectorSettings {
 
     AllTheJobsScrapper allTheJobsScrapper = new AllTheJobsScrapper();
 
-
-    public Elements setUpElements() throws Exception {
+    private Elements setUpElements() throws Exception {
         List<String> linkListTest = allTheJobsScrapper.collectLinksFromOneLink();
         Document singleOffer = connectWith(linkListTest.get(0));
         Elements singleOfferBox = singleOffer.select("div#offer_main_info");
         return singleOfferBox;
     }
 
-    public Document setUpContent() throws Exception {
+    private Document setUpContent() throws Exception {
         List<String> linkListTest = allTheJobsScrapper.collectLinksFromOneLink();
         Document singleOffer = connectWith(linkListTest.get(0));
         return singleOffer;

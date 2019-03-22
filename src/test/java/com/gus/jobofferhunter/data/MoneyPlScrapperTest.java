@@ -18,8 +18,7 @@ public class MoneyPlScrapperTest extends DataCollectorSettings {
 
     private final String LINK = "https://praca.money.pl/oferty,pracy,wyszukaj,0-p4.html?slowo=&zawod=&wojewodztwo=&okres=";
 
-
-    public Elements setUpElements() throws IOException {
+    private Elements setUpElements() throws IOException {
         Document singleOffer = connectWith(LINK);
         Elements jobOfferTable = singleOffer.select("table.lista-ofert");
         Elements singleOfferBox = jobOfferTable.select("tr");
