@@ -85,17 +85,17 @@ public class InfoPracaScrapper extends DataCollectorSettings {
         collectData();
     }
 
-    private String searchForRegion(Element element) {
+    public String searchForRegion(Element element) {
         String region = element.select("h4.serp-one-location > span.p-region").text();
         return region;
     }
 
-    private String searchForUrl(Element element) {
+    public String searchForUrl(Element element) {
         String url = element.select("h2.p-job-title > a").attr("abs:href");
         return url;
     }
 
-    private String searchForDatePublished(Element element) {
+    public String searchForDatePublished(Element element) {
         String datePublished = element.select("span.last-update").text();
         String correction = null;
         try {
@@ -122,17 +122,17 @@ public class InfoPracaScrapper extends DataCollectorSettings {
         }
     }
 
-    private String searchForWorkplace(Element element) {
+    public String searchForWorkplace(Element element) {
         String workplace = element.select("h4.serp-one-location > span.p-locality").text();
         return workplace;
     }
 
-    private String searchForEmployer(Element element) {
+    public String searchForEmployer(Element element) {
         String employer = element.select("h3.p-name.company").text();
         return employer;
     }
 
-    private String searchForPosition(Element element) {
+    public String searchForPosition(Element element) {
         String position = element.select("h2.p-job-title").text();
         return position;
     }
