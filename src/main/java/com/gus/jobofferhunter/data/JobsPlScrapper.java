@@ -168,37 +168,37 @@ public class JobsPlScrapper extends DataCollectorSettings {
     /**
      * Path to values from single job offer.
      */
-    private String searchForPosition(Element element) {
+    public String searchForPosition(Element element) {
         String position =
                 element.select("p.title").text();
         return position;
     }
 
-    private String searchForEmployer(Element element) {
+    public String searchForEmployer(Element element) {
         String employer =
                 element.select("p.employer").text();
         return employer;
     }
 
-    private String searchForDatePublished(Element element) {
+    public String searchForDatePublished(Element element) {
         String datePublished =
                 element.select("p.date").text();
         return datePublished;
     }
 
-    private String searchForWorkplace(Element element) {
+    public String searchForWorkplace(Element element) {
         String workplace =
                 element.select("p.localization").text();
         return workplace;
     }
 
-    private String searchForUrl(Element element) {
+    public String searchForUrl(Element element) {
         String url =
                 element.select("p.title > a").attr("abs:href");
         return url;
     }
 
-    private String searchForDataId(Element element) {
+    public String searchForDataId(Element element) {
         String url = searchForUrl(element);
         String dataId =
                 url.substring(searchForUrl(element).length() - 7, searchForUrl(element).length());
