@@ -14,7 +14,7 @@ public class JobsPlScrapperTest extends DataCollectorSettings {
 
     private final String LINK = "https://www.jobs.pl/oferty/p-2";
 
-    public Elements setUpElements() throws IOException {
+    private Elements setUpElements() throws IOException {
         Document document = connectWith(LINK);
         Elements singleOfferList = document
                 .select("div.offer-list");

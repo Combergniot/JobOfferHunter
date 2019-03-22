@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 public class GumtreeScrapper extends DataCollectorSettings {
@@ -60,6 +61,17 @@ public class GumtreeScrapper extends DataCollectorSettings {
         }
         removeDuplicatesFromList();
         log.info("Links to all job offers from gumtree.pl has been downloaded!");
+    }
+
+    public List<String> createListLinksFromOneSite(String url) throws Exception{
+             Document linkCollection = connectWith(url);
+            Elements content = linkCollection.select("div.view>ul");
+            Elements elements = content.select("div.container");
+            for (Element element : elements) {
+                String link  = element.select("div.title > a.href-link").attr("abs:href");
+                jobOffersList.add(link);
+            }
+       return removeDuplicatesFromList();
     }
 
     public void collectData() throws Exception {
@@ -118,7 +130,7 @@ public class GumtreeScrapper extends DataCollectorSettings {
     }
 
     //    TODO - zostawic tylko branze
-    private String searchForBranch(Document singleOffer) {
+    public String searchForBranch(Document singleOffer) {
         try {
             String branch = singleOffer.select("span.microdata").last().text();
             return branch;
@@ -128,22 +140,22 @@ public class GumtreeScrapper extends DataCollectorSettings {
     }
 
     //    TODO - zostawic sam numer
-    private String searchForDataId(Document singleOffer) {
+    public String searchForDataId(Document singleOffer) {
         String dataId = singleOffer.select("div.breadcrumbs > span.title").text();
         return dataId;
     }
 
-    private String searchForPosition(Document singleOffer) {
+    public String searchForPosition(Document singleOffer) {
         String position = singleOffer.select("h1.item-title >span.myAdTitle").text();
         return position;
     }
 
-    private String searchForDescription(Document singleOffer) {
+    public String searchForDescription(Document singleOffer) {
         String description = singleOffer.select("div.description").text();
         return description;
     }
 
-    private String searchForContractType(Element element) {
+    public String searchForContractType(Element element) {
         String searchForContractType = element
                 .getElementsContainingOwnText("Rodzaj umowy")
                 .next()
@@ -151,7 +163,7 @@ public class GumtreeScrapper extends DataCollectorSettings {
         return searchForContractType;
     }
 
-    private String searchForTypeOfWork(Element element) {
+    public String searchForTypeOfWork(Element element) {
         String searchForTypeOfWork = element
                 .getElementsContainingOwnText("Rodzaj pracy")
                 .next()
@@ -159,7 +171,7 @@ public class GumtreeScrapper extends DataCollectorSettings {
         return searchForTypeOfWork;
     }
 
-    private String searchForAnnouncedBy(Element element) {
+    public String searchForAnnouncedBy(Element element) {
         String announcedBy = element
                 .getElementsContainingOwnText("Ogłaszane przez")
                 .next()
@@ -167,12 +179,12 @@ public class GumtreeScrapper extends DataCollectorSettings {
         return announcedBy;
     }
 
-    private String searchForWorkplace(Element element) {
+    public String searchForWorkplace(Element element) {
         String workplace = element.select("div.location").text();
         return workplace;
     }
 
-    private String searchForDatePublished(Element element) {
+    public String searchForDatePublished(Element element) {
         String datePublished =
                 element.getElementsContainingOwnText("Data dodania").next().text();
         return datePublished;

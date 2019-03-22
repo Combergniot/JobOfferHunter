@@ -18,7 +18,7 @@ public class OlxScrapperTest extends DataCollectorSettings {
     private final String TITLE_BOX = "div.offer-titlebox";
     private final String OFFER_PARAMETER = "ul.offer-parameters";
 
-    public Elements setUpElements(String selector) throws IOException {
+    private Elements setUpElements(String selector) throws IOException {
         Document document = connectWith(olxScrapper
                 .collectLinksFromOneSite("https://www.olx.pl/praca/informatyka/?page=2")
                 .get(0));
@@ -26,7 +26,7 @@ public class OlxScrapperTest extends DataCollectorSettings {
         return elements;
     }
 
-    public Document setUpDocument() throws IOException {
+    private Document setUpDocument() throws IOException {
         Document document = connectWith(olxScrapper
                 .collectLinksFromOneSite("https://www.olx.pl/praca/informatyka/?page=2")
                 .get(0));

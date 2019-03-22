@@ -14,7 +14,7 @@ public class InfoPracaScrapperTest extends DataCollectorSettings{
 
     private final String LINK = "https://www.infopraca.pl/praca?q=&lc=&pg=6";
 
-    public Elements setUpElements() throws IOException {
+    private Elements setUpElements() throws IOException {
         Document document = connectWith(LINK);
         Elements singleOffer = document
                 .select("ul#results-list>li");
