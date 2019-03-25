@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 //TODO Ze skryptu mozna wyodrębnic samą nazwę miejscowosc, forme zatrudnienia i ID oferty.
 // Datę publikacji by trzeba razem z linkiem pobierac, jako hashmapę
@@ -24,7 +25,7 @@ public class GratkaScrapper extends DataCollectorSettings {
 
     private static final Logger log = LoggerFactory.getLogger(GratkaScrapper.class);
 
-    //TODO - split może powodować błedy
+
     public int findLastPaginationNumber() throws Exception {
         Document paginationPage = connectWith("https://gratka.pl/praca");
         Elements pagination = paginationPage
@@ -33,9 +34,7 @@ public class GratkaScrapper extends DataCollectorSettings {
         String lastNumber = searchedNumber.substring(0, searchedNumber.length() - 4);
         int lastPaginationNumber = Integer.parseInt(lastNumber);
         return lastPaginationNumber;
-
     }
-
 
     private void fillPaginationList() throws Exception {
         int lastPaginationNumber = findLastPaginationNumber();
@@ -72,18 +71,31 @@ public class GratkaScrapper extends DataCollectorSettings {
             Document linkCollection = connectWith(paginationList.get(i));
 
             Element content = linkCollection.getElementById("leftColumn");
-            Elements url = content.select("a.teaser");
-//            Elements datePosted = content.select("ul.teaser__info");
+            Elements url = content.select("article.teaser");
             for (Element element : url) {
-                String link = element.attr("abs:href");
+                String link = element
+                        .select("a.teaser__anchor")
+                        .attr("abs:href");
                 jobOffersList.add(link);
                 System.out.println(link);
             }
         }
-//        TODO - oficjalnie 13162, zostało 9996. Sprawdzic czy to nie zbyt restrykcyjne podejscie
         removeDuplicatesFromList();
         log.info("Links to all job offers has been downloaded!");
     }
+
+    public List<String> collectLinkFromOneSite(String link) throws Exception {
+        Document linkCollection = connectWith(link);
+        Element content = linkCollection.getElementById("leftColumn");
+        Elements elements = content.select("article.teaser");
+        for (Element element : elements) {
+            String url = element.select("a.teaser__anchor")
+                    .attr("abs:href");
+            jobOffersList.add(url);
+        }
+        return jobOffersList;
+    }
+
 
     /**
      * Collects data from all single job offer from the portal "gratka.pl".
@@ -92,13 +104,13 @@ public class GratkaScrapper extends DataCollectorSettings {
         log.info("The data downloading is in progress...");
         for (int i = 0; i < jobOffersList.size(); i++) {
             Document singleOffer = connectWith(jobOffersList.get(i));
-            Elements mainTable = singleOffer.select("div#rightColumn");
+            Elements mainTable = singleOffer.select("div.sticker__bar");
             Gratka gratka = new Gratka();
             for (Element element : mainTable) {
                 gratka.setPosition(searchForPosition(element));
                 gratka.setSalary(searchForSalary(element));
             }
-            Elements parameters = mainTable.select("div.parameters");
+            Elements parameters = mainTable.select("ul.parameters__rolled");
             for (Element element : parameters) {
                 gratka.setWorkplace(searchForWorkplace(element));
                 gratka.setEmployer(searchForEmployer(element));
@@ -117,14 +129,14 @@ public class GratkaScrapper extends DataCollectorSettings {
     }
 
     public void test() throws Exception {
-        Document singleOffer = connectWith("https://gratka.pl/praca/frezer-cnc-wynagrodzenie-nawet-5500-zl/ob/3671707");
-        Elements mainTable = singleOffer.select("div#rightColumn");
+        Document singleOffer = connectWith("https://gratka.pl/praca/pracownik-porzadkowy/ob/10572959");
+        Elements mainTable = singleOffer.select("div.sticker__bar");
         Gratka gratka = new Gratka();
         for (Element element : mainTable) {
             gratka.setPosition(searchForPosition(element));
             gratka.setSalary(searchForSalary(element));
         }
-        Elements parameters = mainTable.select("div.parameters");
+        Elements parameters = mainTable.select("ul.parameters__rolled");
         for (Element element : parameters) {
             gratka.setWorkplace(searchForWorkplace(element));
             gratka.setEmployer(searchForEmployer(element));
@@ -173,7 +185,7 @@ public class GratkaScrapper extends DataCollectorSettings {
         return positionLevel;
     }
 
-    private String searchForTypeOfWork(Element element) {
+    public String searchForTypeOfWork(Element element) {
         String typeOfWork =
                 element.getElementsContainingOwnText("Rodzaj pracy").next().text();
         return typeOfWork;
@@ -181,18 +193,18 @@ public class GratkaScrapper extends DataCollectorSettings {
 
     public String searchForEmployer(Element element) {
         String employer =
-                element.getElementsContainingOwnText("Nazwa firmy").next().text();
+                element.getElementsContainingOwnText("Imię / Nazwa firmy").next().text();
         return employer;
     }
 
     public String searchForWorkplace(Element element) {
         String workplace =
-                element.getElementsContainingOwnText("Region").next().text();
+                element.getElementsContainingOwnText("Lokalizacja").next().text();
         return workplace;
     }
 
     public String searchForSalary(Element element) {
-        String salary = element.select("p.sticker__price").text();
+        String salary = element.select("div.priceInfo").text();
         return salary;
     }
 
