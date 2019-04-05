@@ -1,6 +1,5 @@
 package com.gus.jobofferhunter.data;
 
-import com.gus.jobofferhunter.processing.PracujPlDataProcessing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,8 +30,6 @@ public class Scrapper {
     InfoPracaScrapper infoPracaScrapper;
     @Autowired
     AbsolventScrapper absolventScrapper;
-    @Autowired
-    PracujPlDataProcessing pracujPlDataProcessing;
     @Autowired
     AdzunaScrapper adzunaScrapper;
     @Autowired

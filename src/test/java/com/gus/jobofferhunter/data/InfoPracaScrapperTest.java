@@ -22,11 +22,6 @@ public class InfoPracaScrapperTest extends DataCollectorSettings{
     }
 
 
-//    @Test
-//    public void shouldSayThatCollectStructureMethodWorksFine() throws Exception {
-//       infoPracaScrapper.collectStructure();
-//    }
-
     @Test
     public void shouldSayThatPositionIsNotNull() throws IOException {
         for (Element element : setUpElements()) {
