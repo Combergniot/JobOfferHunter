@@ -6,4 +6,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InfoPracaRepository extends CrudRepository<InfoPraca, Long> {
+
+    InfoPraca findById(Long id);
+
+    Iterable<InfoPraca> findByRegion(String region);
+
+    Iterable<InfoPraca> findByWorkplace(String workplace);
+
+    Iterable<InfoPraca> findByEmployer(String employer);
+
+    Iterable<InfoPraca> findByDatePublished(String datePublished);
+
+    Iterable<InfoPraca> findByPosition(String position);
 }

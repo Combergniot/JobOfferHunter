@@ -26,6 +26,7 @@ public class AbsolventScrapper extends DataCollectorSettings {
 
         System.out.println(paginationPage.select("div.main").text());
 
+
 //        Elements elements = paginationPage.select("div.pagination");
 ////        for (Element element : elements) {
 ////            String link = element.select("a.next-prev").attr("href");
